@@ -12,9 +12,9 @@ namespace SnakeGame
 {
     public partial class MainWindow : Window
     {
-        private const int BoardWidth                = 29;
-        private const int BoardHeight               = 15;
-        private const int CellSize                  = 50;
+        private const int BoardWidth                = 30;
+        private const int BoardHeight               = 30;
+        private const int CellSize                  = 30;
 
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor  = Brushes.Red;
@@ -103,11 +103,11 @@ namespace SnakeGame
             play_area.Children.Add(newHead);
             snake.Insert(0, newHead);
 
-            // Check if food is eaten
-            if (newX == food.X && newY == food.Y)
-            {
-                EatFood();
-            }
+            //// Check if food is eaten
+            //if (newX == food.X && newY == food.Y)
+            //{
+            //    EatFood();
+            //}
         }
 
         private void CheckCollision()
@@ -121,6 +121,12 @@ namespace SnakeGame
                 snake.Any(s => s != head && Canvas.GetLeft(s) == headX && Canvas.GetTop(s) == headY))
             {
                 GameOver();
+            }
+
+            // Check if food is eaten
+            if (headX == food.X && headY == food.Y)
+            {
+                EatFood();
             }
         }
 
@@ -142,7 +148,7 @@ namespace SnakeGame
 
             food = new Point(x * CellSize, y * CellSize);
 
-            var foodPiece = new Rectangle
+            var foodPiece = new Ellipse
             {
                 Fill = FoodColor,
                 Width = CellSize,

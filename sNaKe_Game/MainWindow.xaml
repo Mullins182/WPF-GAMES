@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnakeGame"
         mc:Ignorable="d"
-        Title="| s N a K e |  by Mullins182" Height="900" Width="1500" SizeToContent="Manual"
-        WindowStartupLocation="CenterScreen" MinHeight="650" MinWidth="1200" 
+        Title="| s N a K e |  by Mullins182" Height="1000" Width="1400" SizeToContent="Manual"
+        WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize"
         Foreground="White" Background="Black">
 
     <Grid>
