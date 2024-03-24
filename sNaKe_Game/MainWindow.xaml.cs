@@ -12,17 +12,17 @@ namespace SnakeGame
 {
     public partial class MainWindow : Window
     {
-        private const int BoardWidth  = 29;
-        private const int BoardHeight = 15;
-        private const int CellSize    = 50;
+        private const int BoardWidth                = 29;
+        private const int BoardHeight               = 15;
+        private const int CellSize                  = 50;
 
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
-        private readonly SolidColorBrush FoodColor = Brushes.Red;
+        private readonly SolidColorBrush FoodColor  = Brushes.Red;
 
-        private readonly List<Ellipse> snake = [];
+        private readonly List<Ellipse> snake        = [];
         private Point food;
-        private Direction direction = Direction.Right;
-        private DispatcherTimer timer = new();
+        private Direction direction                 = Direction.Right;
+        private DispatcherTimer timer               = new();
 
         public MainWindow()
         {
@@ -32,7 +32,6 @@ namespace SnakeGame
 
         private void InitializeGame()
         {
-
             DrawSnakePiece(5, 5);
             DrawSnakePiece(5, 6);
             DrawSnakePiece(5, 7);
@@ -55,10 +54,8 @@ namespace SnakeGame
             var piece = new Ellipse
             {
                 Fill = SnakeColor,
-                //Width = CellSize,
-                //Height = CellSize
-                Width = 50,
-                Height = 50
+                Width = CellSize,
+                Height = CellSize
             };
             Canvas.SetLeft(piece, x);
             Canvas.SetTop(piece, y);
@@ -98,10 +95,8 @@ namespace SnakeGame
             var newHead = new Ellipse
             {
                 Fill = SnakeColor,
-                //Width = CellSize,
-                //Height = CellSize
-                Width = 50,
-                Height = 50
+                Width = CellSize,
+                Height = CellSize
             };
             Canvas.SetLeft(newHead, newX);
             Canvas.SetTop(newHead, newY);
