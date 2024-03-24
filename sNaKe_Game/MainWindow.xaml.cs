@@ -12,41 +12,59 @@ namespace SnakeGame
 {
     public partial class MainWindow : Window
     {
-        private const int BoardWidth = 30;
-        private const int BoardHeight = 20;
-        private const int CellSize = 20;
+        private const int BoardWidth  = 29;
+        private const int BoardHeight = 15;
+        private const int CellSize    = 50;
+
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor = Brushes.Red;
 
-        private readonly List<Rectangle> snake = new List<Rectangle>();
+        private readonly List<Ellipse> snake = [];
         private Point food;
         private Direction direction = Direction.Right;
-        private DispatcherTimer timer;
+        private DispatcherTimer timer = new();
 
         public MainWindow()
         {
             InitializeComponent();
-            InitializeGame();
-            this.KeyDown += MainWindow_KeyDown; // Event für Tastatureingaben hinzufügen
+            this.KeyDown += MainWindow_KeyDown; // Event for keyboard inputs
         }
 
         private void InitializeGame()
         {
+
             DrawSnakePiece(5, 5);
             DrawSnakePiece(5, 6);
             DrawSnakePiece(5, 7);
 
             PlaceFood();
 
-            timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
-            timer.Tick += Timer_Tick;
+            timer.Interval = TimeSpan.FromMilliseconds(80);
+            timer.Tick += GameRoutine;
             timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void GameRoutine(object? sender, EventArgs e)
         {
             MoveSnake();
             CheckCollision();
+        }
+
+        private void DrawSnakePiece(int x, int y)
+        {
+            var piece = new Ellipse
+            {
+                Fill = SnakeColor,
+                //Width = CellSize,
+                //Height = CellSize
+                Width = 50,
+                Height = 50
+            };
+            Canvas.SetLeft(piece, x);
+            Canvas.SetTop(piece, y);
+
+            play_area.Children.Add(piece);
+            snake.Insert(0, piece);
         }
 
         private void MoveSnake()
@@ -77,11 +95,13 @@ namespace SnakeGame
             play_area.Children.Remove(tail);
 
             // Add new head
-            var newHead = new Rectangle
+            var newHead = new Ellipse
             {
                 Fill = SnakeColor,
-                Width = CellSize,
-                Height = CellSize
+                //Width = CellSize,
+                //Height = CellSize
+                Width = 50,
+                Height = 50
             };
             Canvas.SetLeft(newHead, newX);
             Canvas.SetTop(newHead, newY);
@@ -109,31 +129,10 @@ namespace SnakeGame
             }
         }
 
-        private void GameOver()
-        {
-            timer.Stop();
-            InitializeGame();
-        }
-
         private void EatFood()
         {
             DrawSnakePiece((int)food.X / CellSize, (int)food.Y / CellSize);
             PlaceFood();
-        }
-
-        private void DrawSnakePiece(int x, int y)
-        {
-            var piece = new Rectangle
-            {
-                Fill = SnakeColor,
-                Width = CellSize,
-                Height = CellSize
-            };
-            Canvas.SetLeft(piece, x * CellSize);
-            Canvas.SetTop(piece, y * CellSize);
-
-            play_area.Children.Add(piece);
-            snake.Insert(0, piece);
         }
 
         private void PlaceFood()
@@ -160,7 +159,13 @@ namespace SnakeGame
             play_area.Children.Add(foodPiece);
         }
 
-        // Event-Handler für Tastatureingaben
+        private void GameOver()
+        {
+            timer.Stop();
+            play_area.Background = Brushes.DarkRed;
+        }
+
+        // Event-Handler for Keyboard Inputs
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -185,7 +190,7 @@ namespace SnakeGame
         }
         private void play_Click(object sender, RoutedEventArgs e)
         {
-
+            InitializeGame();
         }
 
         private void quit_Click(object sender, RoutedEventArgs e)
