@@ -25,7 +25,7 @@ namespace SnakeGame
 
             this.KeyDown += new KeyEventHandler(OnButtonKeyDown);
             paintSnake(currentPosition);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, SnakeSpeed);
+            timer.Interval = TimeSpan.FromMilliseconds(SnakeSpeed);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -36,13 +36,11 @@ namespace SnakeGame
             Segment.Fill = Brushes.Red;
             Segment.Width = SnakeSizeW;
             Segment.Height = SnakeSizeH;
-            //currentPosition.X = 1000;
-            //currentPosition.Y = 350;
             Canvas.SetTop(Segment, currentPosition.Y);
             Canvas.SetLeft(Segment, currentPosition.X);
             int count = play_area.Children.Count;
             play_area.Children.Add(Segment);
-            currentPosition = new Point(currentPosition.X, currentPosition.Y);
+            //currentPosition = new Point(currentPosition.X, currentPosition.Y);
         }
 
         private void Timer_Tick(object? sender, EventArgs e)
