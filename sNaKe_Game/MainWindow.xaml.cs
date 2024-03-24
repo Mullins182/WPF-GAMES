@@ -12,40 +12,38 @@ namespace SnakeGame
 {
     public partial class MainWindow : Window
     {
-        private int BoardWidth = 0;
-        private int BoardHeight = 0;
-        private const int CellSize = 1;
+        private const int BoardWidth = 30;
+        private const int BoardHeight = 20;
+        private const int CellSize = 20;
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor = Brushes.Red;
 
-        private readonly List<Ellipse> snake = [];
+        private readonly List<Rectangle> snake = new List<Rectangle>();
         private Point food;
         private Direction direction = Direction.Right;
-        private DispatcherTimer timer = new();
+        private DispatcherTimer timer;
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeGame();
+            this.KeyDown += MainWindow_KeyDown; // Event für Tastatureingaben hinzufügen
         }
 
         private void InitializeGame()
         {
-            BoardHeight = (int)play_area.ActualHeight;
-            BoardWidth = (int)play_area.ActualWidth;
-
             DrawSnakePiece(5, 5);
             DrawSnakePiece(5, 6);
             DrawSnakePiece(5, 7);
 
             PlaceFood();
 
-            timer.Interval = TimeSpan.FromMilliseconds(30);
-            timer.Tick += GameRoutine;
+            timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
+            timer.Tick += Timer_Tick;
             timer.Start();
         }
 
-        private void GameRoutine(object? sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             MoveSnake();
             CheckCollision();
@@ -53,45 +51,62 @@ namespace SnakeGame
 
         private void MoveSnake()
         {
-            for (int i = snake.Count - 1; i > 0; i--)
-            {
-                var currentPiece = snake[i];
-                var nextPiece = snake[i - 1];
-                Canvas.SetLeft(currentPiece, Canvas.GetLeft(nextPiece));
-                Canvas.SetTop(currentPiece, Canvas.GetTop(nextPiece));
-            }
+            var head = snake.First();
+            var newX = Canvas.GetLeft(head);
+            var newY = Canvas.GetTop(head);
 
-            var head = snake[0];
             switch (direction)
             {
                 case Direction.Up:
-                    Canvas.SetTop(head, Canvas.GetTop(head) - CellSize);
+                    newY -= CellSize;
                     break;
                 case Direction.Down:
-                    Canvas.SetTop(head, Canvas.GetTop(head) + CellSize);
+                    newY += CellSize;
                     break;
                 case Direction.Left:
-                    Canvas.SetLeft(head, Canvas.GetLeft(head) - CellSize);
+                    newX -= CellSize;
                     break;
                 case Direction.Right:
-                    Canvas.SetLeft(head, Canvas.GetLeft(head) + CellSize);
+                    newX += CellSize;
                     break;
+            }
+
+            // Remove tail
+            var tail = snake.Last();
+            snake.Remove(tail);
+            play_area.Children.Remove(tail);
+
+            // Add new head
+            var newHead = new Rectangle
+            {
+                Fill = SnakeColor,
+                Width = CellSize,
+                Height = CellSize
+            };
+            Canvas.SetLeft(newHead, newX);
+            Canvas.SetTop(newHead, newY);
+            play_area.Children.Add(newHead);
+            snake.Insert(0, newHead);
+
+            // Check if food is eaten
+            if (newX == food.X && newY == food.Y)
+            {
+                EatFood();
             }
         }
 
         private void CheckCollision()
         {
-            //var head = snake[0];
-            //if (Canvas.GetLeft(head) < 0 || Canvas.GetLeft(head) >= BoardWidth * CellSize ||
-            //    Canvas.GetTop(head) < 0 || Canvas.GetTop(head) >= BoardHeight * CellSize)
-            //{
-            //    GameOver();
-            //}
+            var head = snake.First();
+            var headX = Canvas.GetLeft(head);
+            var headY = Canvas.GetTop(head);
 
-            //if (Canvas.GetLeft(head) == Canvas.GetLeft((UIElement)play_area.FindName("food")) && Canvas.GetTop(head) == Canvas.GetTop((UIElement)play_area.FindName("food")))
-            //{
-            //    EatFood();
-            //}
+            if (headX < 0 || headX >= BoardWidth * CellSize ||
+                headY < 0 || headY >= BoardHeight * CellSize ||
+                snake.Any(s => s != head && Canvas.GetLeft(s) == headX && Canvas.GetTop(s) == headY))
+            {
+                GameOver();
+            }
         }
 
         private void GameOver()
@@ -102,18 +117,17 @@ namespace SnakeGame
 
         private void EatFood()
         {
-            var tail = snake.Last();
-            DrawSnakePiece((int)Canvas.GetLeft(tail) / CellSize, (int)Canvas.GetTop(tail) / CellSize);
+            DrawSnakePiece((int)food.X / CellSize, (int)food.Y / CellSize);
             PlaceFood();
         }
 
         private void DrawSnakePiece(int x, int y)
         {
-            var piece = new Ellipse
+            var piece = new Rectangle
             {
                 Fill = SnakeColor,
-                Width = 50,
-                Height = 30
+                Width = CellSize,
+                Height = CellSize
             };
             Canvas.SetLeft(piece, x * CellSize);
             Canvas.SetTop(piece, y * CellSize);
@@ -134,12 +148,11 @@ namespace SnakeGame
 
             food = new Point(x * CellSize, y * CellSize);
 
-            var foodPiece = new Ellipse
+            var foodPiece = new Rectangle
             {
                 Fill = FoodColor,
                 Width = CellSize,
-                Height = CellSize,
-                Name = "food"
+                Height = CellSize
             };
             Canvas.SetLeft(foodPiece, food.X);
             Canvas.SetTop(foodPiece, food.Y);
@@ -147,7 +160,8 @@ namespace SnakeGame
             play_area.Children.Add(foodPiece);
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        // Event-Handler für Tastatureingaben
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
@@ -169,15 +183,14 @@ namespace SnakeGame
                     break;
             }
         }
+        private void play_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void quit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void play_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 
