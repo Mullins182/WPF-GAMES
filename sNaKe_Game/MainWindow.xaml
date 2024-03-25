@@ -8,8 +8,30 @@
         Title="s N a K e | Version Beta 0.8 | by Mullins182" Height="1000" Width="1400" SizeToContent="Manual"
         WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize"
         Foreground="White" Background="Black">
+    <!--Control Template Override für Buttons um Highlighting bei Mouseover zu verhindern !-->
+    <Window.Resources>
+        <ControlTemplate x:Key="NoMouseOverButtonTemplate"
+                 TargetType="Button">
+            <Border Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  
+                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"  
+             Value="False">
+                    <Setter Property="Background"  
+              Value="{x:Static SystemColors.ControlLightBrush}"/>
+                    <Setter Property="Foreground"  
+              Value="{x:Static SystemColors.GrayTextBrush}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <!--Control Templates Override ENDE !-->
 
-    <Grid>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -22,13 +44,13 @@
                                 Background="#330000" Height="50" Width="auto">
 
             <Button x:Name="play" Content="Start/Pause Game" Height="40" Width="210" Background="Black" Click="play_Click" ClickMode="Release"
-                    Foreground="DarkOrange" FontFamily="Arial Black" FontSize="20"/>
+                    Foreground="DarkOrange" FontFamily="Arial Black" FontSize="20" Template="{StaticResource NoMouseOverButtonTemplate}"/>
 
             <Button x:Name="reset" Content="Reset Game" Height="40" Width="150" Background="Black" Click="reset_Click" ClickMode="Release"
-                    Foreground="DarkOrange" FontFamily="Arial Black" FontSize="20"/>
+                    Foreground="DarkOrange" FontFamily="Arial Black" FontSize="20" Template="{StaticResource NoMouseOverButtonTemplate}"/>
 
             <Button x:Name="quit" Content="Quit Game" Height="40" Width="150" Background="Black" Click="quit_Click" ClickMode="Release"
-                    Foreground="OrangeRed" FontFamily="Arial Black" FontSize="20"/>
+                    Foreground="OrangeRed" FontFamily="Arial Black" FontSize="20" Template="{StaticResource NoMouseOverButtonTemplate}"/>
 
         </VirtualizingStackPanel>
 

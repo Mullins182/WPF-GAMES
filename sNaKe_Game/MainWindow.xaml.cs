@@ -39,6 +39,10 @@ namespace SnakeGame
 
             Game_Timer.Tick         += GameRoutine;
 
+            play.IsTabStop          = false;
+            reset.IsTabStop         = false;
+            quit.IsTabStop          = false;
+
             InitializeGame();
         }
 
@@ -208,9 +212,15 @@ namespace SnakeGame
             if (Game_Timer.IsEnabled)
             {
                 Game_Timer.Stop();
+
+                quit.IsEnabled  = true;
+                reset.IsEnabled = true;
             }
             else
             {
+                quit.IsEnabled  = false;
+                reset.IsEnabled = false;
+
                 Game_Timer.Start();
             }
         }
