@@ -12,9 +12,9 @@ namespace SnakeGame
 {
     public partial class MainWindow : Window
     {
-        //private const int BoardWidth                = 100;
-        //private const int BoardHeight               = 100;
         private const int CellSize                  = 50;
+
+        private readonly DispatcherTimer timer      = new();
 
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor  = Brushes.Red;
@@ -22,15 +22,12 @@ namespace SnakeGame
         private readonly List<Ellipse> snake        = [];
         private Point food;
         private Direction direction                 = Direction.Left;
-        private readonly Ellipse foodPiece = new Ellipse
+        private readonly Ellipse foodPiece          = new()
         {
             Fill = Brushes.Red,
             Width = CellSize,
             Height = CellSize
         };
-        private readonly DispatcherTimer timer      = new();
-
-        private int canvasFoodi                     = 0;
 
         public MainWindow()
         {
@@ -72,7 +69,7 @@ namespace SnakeGame
             Canvas.SetLeft(piece, x);
             Canvas.SetTop(piece, y);
 
-            //play_area.Children.Add(piece);
+            play_area.Children.Add(piece);
             snake.Insert(0, piece);
         }
 
