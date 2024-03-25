@@ -12,7 +12,7 @@ namespace SnakeGame
 {
     public partial class MainWindow : Window
     {
-        private const int BoardWidth                = 30;
+        private const int BoardWidth                = 40;
         private const int BoardHeight               = 30;
         private const int CellSize                  = 30;
 
@@ -57,8 +57,8 @@ namespace SnakeGame
                 Width = CellSize,
                 Height = CellSize
             };
-            Canvas.SetLeft(piece, x);
-            Canvas.SetTop(piece, y);
+            Canvas.SetLeft(piece, x * CellSize);
+            Canvas.SetTop(piece, y * CellSize);
 
             play_area.Children.Add(piece);
             snake.Insert(0, piece);
