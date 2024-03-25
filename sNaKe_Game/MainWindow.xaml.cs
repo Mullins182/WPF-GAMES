@@ -39,17 +39,15 @@ namespace SnakeGame
 
             Game_Timer.Tick         += GameRoutine;
 
-            play.IsTabStop          = false;
-            reset.IsTabStop         = false;
-            quit.IsTabStop          = false;
-
-            play.Focus();
-
             InitializeGame();
         }
 
         private async void InitializeGame()
         {
+            play.IsTabStop  = false;
+            reset.IsTabStop = false;
+            quit.IsTabStop  = false;
+
             snake.Clear();
             direction = Direction.Left;
             play_area.Children.Clear();
@@ -61,6 +59,8 @@ namespace SnakeGame
             DrawSnakePiece(1100, 350);
 
             PlaceFood();
+
+            ReadyForPlay();
         }
 
         private void GameRoutine(object? sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace SnakeGame
             var headY   = Canvas.GetTop(head);
 
             if (headX < 0 || headX >= play_area.ActualWidth - head.ActualWidth ||
-                headY < 0 || headY >= play_area.ActualHeight - (head.ActualHeight + 60))
+                headY < 0 || headY >= play_area.ActualHeight - 110)
             {
                 GameOver();
             }
@@ -167,6 +167,8 @@ namespace SnakeGame
                 y = random.Next(0, (int)play_area.ActualHeight);
             } while (x % 50 != 0 || y % 50 != 0);
 
+            y = (int)play_area.ActualHeight - 50;
+
             food = new Point(x, y);
 
             play_area.Children.Add(foodPiece);
@@ -185,15 +187,14 @@ namespace SnakeGame
         private void GameOver()
         {
             Game_Timer.Stop();
-            //play_area.Background = Brushes.DarkRed;
-
-            Game_Timer.Stop();
-            quit.IsEnabled = true;
-            reset.IsEnabled = true;
-            play.IsEnabled = false;
-            quit.Foreground = Brushes.DarkOrange;
-            reset.Foreground = Brushes.DarkOrange;
-            play.Foreground = Brushes.DarkRed;
+            play_area.Background = Brushes.DarkRed;
+            quit.IsEnabled      = true;
+            reset.IsEnabled     = true;
+            play.IsEnabled      = false;
+            quit.Foreground     = Brushes.DarkOrange;
+            reset.Foreground    = Brushes.DarkOrange;
+            play.Foreground     = Brushes.DarkRed;
+            reset.Focus();
         }
 
         // Event-Handler for Keyboard Inputs
@@ -218,6 +219,18 @@ namespace SnakeGame
                         direction = Direction.Right;
                     break;
             }
+        }
+
+        private void ReadyForPlay()
+        {
+            play_area.Background    = new SolidColorBrush(Color.FromArgb(255,34,47,00));
+            quit.IsEnabled          = true;
+            reset.IsEnabled         = true;
+            play.IsEnabled          = true;
+            quit.Foreground         = Brushes.DarkOrange;
+            reset.Foreground        = Brushes.DarkOrange;
+            play.Foreground         = Brushes.DarkOrange;
+            play.Focus();
         }
         private void play_Click(object sender, RoutedEventArgs e)
         {
@@ -259,11 +272,24 @@ namespace SnakeGame
         {
             if (e.Key == Key.Space) 
             {
-                play_Click(sender, e);
+                if (play.IsEnabled) 
+                {
+                    play_Click(sender, e);                
+                }
             }
             else if (e.Key == Key.R)
             {
-                reset_Click(sender, e);
+                if (reset.IsEnabled) 
+                {
+                    reset_Click(sender, e);                
+                }
+            }
+            else if (e.Key == Key.Q) 
+            {
+                if (quit.IsEnabled) 
+                {
+                    quit_Click(sender, e);                
+                }
             }
         }
     }

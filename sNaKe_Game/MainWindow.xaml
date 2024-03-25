@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnakeGame"
         mc:Ignorable="d"
-        Title="s N a K e | Version Beta 0.8 | by Mullins182" Height="1000" Width="1515" SizeToContent="Manual"
-        WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize"
+        Title="s N a K e | Version Beta 0.8 | by Mullins182" Height="1030" Width="1515" SizeToContent="Manual"
+        WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize"
         Foreground="White" Background="Black">
     <!--Control Template Override für Buttons um Highlighting bei Mouseover zu verhindern !-->
     <Window.Resources>
