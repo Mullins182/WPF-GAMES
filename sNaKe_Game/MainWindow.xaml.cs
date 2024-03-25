@@ -46,11 +46,13 @@ namespace SnakeGame
             InitializeGame();
         }
 
-        private void InitializeGame()
+        private async void InitializeGame()
         {
             snake.Clear();
             direction = Direction.Left;
             play_area.Children.Clear();
+
+            await Task.Delay(555);
 
             DrawSnakePiece(1000, 350);
             DrawSnakePiece(1050, 350);
