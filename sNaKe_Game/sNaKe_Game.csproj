@@ -8,4 +8,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="png\Cute-green-snake-cartoon-on-transparent-background-PNG.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="png\Cute-green-snake-cartoon-on-transparent-background-PNG.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

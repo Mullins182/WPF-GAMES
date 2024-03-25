@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -15,6 +17,8 @@ namespace SnakeGame
         private const int CellSize                  = 50;
 
         private readonly DispatcherTimer Game_Timer = new();
+
+        private readonly DoubleAnimation blendImage = new();
 
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor  = Brushes.Red;
@@ -39,11 +43,24 @@ namespace SnakeGame
 
             Game_Timer.Tick         += GameRoutine;
 
-            InitializeGame();
+            HelloSnake();
+            InitializeGame(7333);
         }
 
-        private async void InitializeGame()
+        private async void HelloSnake()
         {
+            await Task.Delay(1101);
+
+            blendImage.AutoReverse = true;
+            blendImage.Duration = TimeSpan.FromMilliseconds(3333);
+            blendImage.From = 0;
+            blendImage.To = 1;
+            Start_Snake.BeginAnimation(OpacityProperty, blendImage);
+        }
+        private async void InitializeGame(int delay)
+        {
+            await Task.Delay(delay);
+
             play.IsTabStop  = false;
             reset.IsTabStop = false;
             quit.IsTabStop  = false;
@@ -260,7 +277,7 @@ namespace SnakeGame
 
         private void reset_Click(object sender, RoutedEventArgs e)
         {
-            InitializeGame();
+            InitializeGame(0);
 
             play.IsEnabled = true;
             play.Foreground = Brushes.OrangeRed;
