@@ -184,6 +184,14 @@ namespace SnakeGame
         {
             Game_Timer.Stop();
             //play_area.Background = Brushes.DarkRed;
+
+            Game_Timer.Stop();
+            quit.IsEnabled = true;
+            reset.IsEnabled = true;
+            play.IsEnabled = false;
+            quit.Foreground = Brushes.DarkOrange;
+            reset.Foreground = Brushes.DarkOrange;
+            play.Foreground = Brushes.DarkRed;
         }
 
         // Event-Handler for Keyboard Inputs
@@ -214,14 +222,19 @@ namespace SnakeGame
             if (Game_Timer.IsEnabled)
             {
                 Game_Timer.Stop();
-
                 quit.IsEnabled  = true;
                 reset.IsEnabled = true;
+                quit.Foreground = Brushes.DarkOrange;
+                reset.Foreground = Brushes.DarkOrange;
+                play.Foreground = Brushes.OrangeRed;
             }
             else
             {
                 quit.IsEnabled  = false;
                 reset.IsEnabled = false;
+                quit.Foreground = Brushes.OrangeRed;
+                reset.Foreground = Brushes.OrangeRed;
+                play.Foreground = Brushes.YellowGreen;
 
                 Game_Timer.Start();
             }
@@ -235,6 +248,9 @@ namespace SnakeGame
         private void reset_Click(object sender, RoutedEventArgs e)
         {
             InitializeGame();
+
+            play.IsEnabled = true;
+            play.Foreground = Brushes.OrangeRed;
         }
     }
 
