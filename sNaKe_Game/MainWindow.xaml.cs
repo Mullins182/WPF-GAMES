@@ -49,6 +49,9 @@ namespace SnakeGame
 
         private async void HelloSnake()
         {
+            play.IsEnabled  = false;
+            reset.IsEnabled = false;
+
             await Task.Delay(1101);
 
             blendImage.AutoReverse = true;
@@ -64,6 +67,8 @@ namespace SnakeGame
             play.IsTabStop  = false;
             reset.IsTabStop = false;
             quit.IsTabStop  = false;
+            play.IsEnabled  = true;
+            reset.IsEnabled = true;
 
             snake.Clear();
             direction = Direction.Left;
