@@ -43,6 +43,8 @@ namespace SnakeGame
             reset.IsTabStop         = false;
             quit.IsTabStop          = false;
 
+            play.Focus();
+
             InitializeGame();
         }
 
@@ -251,6 +253,18 @@ namespace SnakeGame
 
             play.IsEnabled = true;
             play.Foreground = Brushes.OrangeRed;
+        }
+
+        private void menu_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) 
+            {
+                play_Click(sender, e);
+            }
+            else if (e.Key == Key.R)
+            {
+                reset_Click(sender, e);
+            }
         }
     }
 
