@@ -128,8 +128,8 @@ namespace SnakeGame
             var headX   = Canvas.GetLeft(head);
             var headY   = Canvas.GetTop(head);
 
-            if (headX < 0 || headX >= play_area.ActualWidth ||
-                headY < 0 || headY >= play_area.ActualHeight)
+            if (headX < 0 || headX >= play_area.ActualWidth - head.ActualWidth ||
+                headY < 0 || headY >= play_area.ActualHeight - (head.ActualHeight + 60))
             {
                 GameOver();
             }
