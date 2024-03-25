@@ -21,7 +21,10 @@
         <VirtualizingStackPanel x:Name="menu" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Background="#330000" Height="50" Width="auto">
 
-            <Button x:Name="play" Content="Start Game" Height="40" Width="150" Background="Black" Click="play_Click" ClickMode="Release"
+            <Button x:Name="play" Content="Start/Pause Game" Height="40" Width="210" Background="Black" Click="play_Click" ClickMode="Release"
+                    Foreground="DarkOrange" FontFamily="Arial Black" FontSize="20"/>
+
+            <Button x:Name="reset" Content="Reset Game" Height="40" Width="150" Background="Black" Click="reset_Click" ClickMode="Release"
                     Foreground="DarkOrange" FontFamily="Arial Black" FontSize="20"/>
 
             <Button x:Name="quit" Content="Quit Game" Height="40" Width="150" Background="Black" Click="quit_Click" ClickMode="Release"

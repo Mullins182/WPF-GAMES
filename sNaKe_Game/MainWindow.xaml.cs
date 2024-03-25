@@ -14,7 +14,7 @@ namespace SnakeGame
     {
         private const int CellSize                  = 50;
 
-        private readonly DispatcherTimer timer      = new();
+        private readonly DispatcherTimer Game_Timer = new();
 
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor  = Brushes.Red;
@@ -32,7 +32,14 @@ namespace SnakeGame
         public MainWindow()
         {
             InitializeComponent();
-            this.KeyDown += MainWindow_KeyDown; // Event for keyboard inputs
+
+            this.KeyDown            += MainWindow_KeyDown; // Event for keyboard inputs
+
+            Game_Timer.Interval     = TimeSpan.FromMilliseconds(100);
+
+            Game_Timer.Tick         += GameRoutine;
+
+            InitializeGame();
         }
 
         private void InitializeGame()
@@ -46,10 +53,6 @@ namespace SnakeGame
             DrawSnakePiece(1100, 350);
 
             PlaceFood();
-
-            timer.Interval = TimeSpan.FromMilliseconds(100);
-            timer.Tick += GameRoutine;
-            timer.Start();
         }
 
         private void GameRoutine(object? sender, EventArgs e)
@@ -173,7 +176,7 @@ namespace SnakeGame
 
         private void GameOver()
         {
-            timer.Stop();
+            Game_Timer.Stop();
             //play_area.Background = Brushes.DarkRed;
         }
 
@@ -202,12 +205,24 @@ namespace SnakeGame
         }
         private void play_Click(object sender, RoutedEventArgs e)
         {
-            InitializeGame();
+            if (Game_Timer.IsEnabled)
+            {
+                Game_Timer.Stop();
+            }
+            else
+            {
+                Game_Timer.Start();
+            }
         }
 
         private void quit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void reset_Click(object sender, RoutedEventArgs e)
+        {
+            InitializeGame();
         }
     }
 
