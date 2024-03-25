@@ -114,12 +114,6 @@ namespace SnakeGame
             Canvas.SetTop(newHead, newY);
             play_area.Children.Add(newHead);
             snake.Insert(0, newHead);
-
-            //// Check if food is eaten
-            //if (newX == food.X && newY == food.Y)
-            //{
-            //    EatFood();
-            //}
         }
 
         private void CheckCollision()
