@@ -131,7 +131,7 @@ namespace SnakeGame
             var headY   = Canvas.GetTop(head);
 
             if (headX < 0 || headX >= play_area.ActualWidth - head.ActualWidth ||
-                headY < 0 || headY >= play_area.ActualHeight - 110)
+                headY < 0 || headY >= play_area.ActualHeight - 50)
             {
                 GameOver();
             }
@@ -164,10 +164,8 @@ namespace SnakeGame
             do
             {
                 x = random.Next(0, (int)play_area.ActualWidth);
-                y = random.Next(0, (int)play_area.ActualHeight);
+                y = random.Next(0, (int)play_area.ActualHeight - 50);
             } while (x % 50 != 0 || y % 50 != 0);
-
-            y = (int)play_area.ActualHeight - 50;
 
             food = new Point(x, y);
 
