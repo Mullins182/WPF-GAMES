@@ -12,6 +12,8 @@ namespace SnakeGame
     {
         private const int CellSize                  = 50;
 
+        private bool iniFin                         = true;
+
         private readonly DispatcherTimer Game_Timer = new();
 
         private readonly MediaPlayer SnakeSound1    = new();
@@ -267,6 +269,7 @@ namespace SnakeGame
             play.Foreground         = Brushes.DarkOrange;
             infobox.Visibility      = Visibility.Visible;
             play.Focus();
+            iniFin = true;
         }
         private void play_Click(object sender, RoutedEventArgs e)
         {
@@ -300,10 +303,14 @@ namespace SnakeGame
 
         private void reset_Click(object sender, RoutedEventArgs e)
         {
-            InitializeGame(0);
+            if (iniFin)
+            {
+                iniFin = false;
 
-            play.IsEnabled = true;
-            play.Foreground = Brushes.OrangeRed;
+                InitializeGame(0);
+
+                play.Foreground = Brushes.OrangeRed;
+            }
         }
 
         private void menu_KeyDown(object sender, KeyEventArgs e)
