@@ -14,8 +14,8 @@ namespace SnakeGame
 
         private readonly DispatcherTimer Game_Timer = new();
 
-        public MediaPlayer SnakeSound1             = new();
-        public MediaPlayer SnakeSound2             = new();
+        private readonly MediaPlayer SnakeSound1    = new();
+        private readonly MediaPlayer SnakeSound2    = new();
 
         private readonly DoubleAnimation blendImage = new();
 
