@@ -47,6 +47,9 @@ namespace SnakeGame
             SnakeSound1.IsMuted = true;
             SnakeSound2.IsMuted = true;
 
+            infobox.Visibility  = Visibility.Collapsed;
+            infobox.Content     = "PRESS\n[SPACE] => Start Game\n[R]          => Reset Game\n[Q]          => Quit Game";
+
             HelloSnake();
             InitializeGame(7333);
         }
@@ -262,6 +265,7 @@ namespace SnakeGame
             quit.Foreground         = Brushes.DarkOrange;
             reset.Foreground        = Brushes.DarkOrange;
             play.Foreground         = Brushes.DarkOrange;
+            infobox.Visibility      = Visibility.Visible;
             play.Focus();
         }
         private void play_Click(object sender, RoutedEventArgs e)
@@ -269,19 +273,21 @@ namespace SnakeGame
             if (Game_Timer.IsEnabled)
             {
                 Game_Timer.Stop();
-                quit.IsEnabled  = true;
-                reset.IsEnabled = true;
-                quit.Foreground = Brushes.DarkOrange;
-                reset.Foreground = Brushes.DarkOrange;
-                play.Foreground = Brushes.OrangeRed;
+                quit.IsEnabled      = true;
+                reset.IsEnabled     = true;
+                quit.Foreground     = Brushes.DarkOrange;
+                reset.Foreground    = Brushes.DarkOrange;
+                play.Foreground     = Brushes.OrangeRed;
+                infobox.Visibility  = Visibility.Visible;
             }
             else
             {
-                quit.IsEnabled  = false;
-                reset.IsEnabled = false;
-                quit.Foreground = Brushes.OrangeRed;
-                reset.Foreground = Brushes.OrangeRed;
-                play.Foreground = Brushes.YellowGreen;
+                infobox.Visibility  = Visibility.Collapsed;
+                quit.IsEnabled      = false;
+                reset.IsEnabled     = false;
+                quit.Foreground     = Brushes.OrangeRed;
+                reset.Foreground    = Brushes.OrangeRed;
+                play.Foreground     = Brushes.YellowGreen;
 
                 Game_Timer.Start();
             }
