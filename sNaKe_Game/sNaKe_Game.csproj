@@ -10,12 +10,27 @@
 
   <ItemGroup>
     <None Remove="png\Cute-green-snake-cartoon-on-transparent-background-PNG.png" />
+    <None Remove="sound_effects\snake_hiss.mp3" />
+    <None Remove="sound_effects\snake_rattle1.mp3" />
+    <None Remove="sound_effects\snake_rattle2.mp3" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="png\Cute-green-snake-cartoon-on-transparent-background-PNG.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="sound_effects\snake_hiss.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sound_effects\snake_rattle1.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sound_effects\snake_rattle2.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

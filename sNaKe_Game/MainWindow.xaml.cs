@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -17,6 +13,9 @@ namespace SnakeGame
         private const int CellSize                  = 50;
 
         private readonly DispatcherTimer Game_Timer = new();
+
+        public MediaPlayer SnakeSound1             = new();
+        public MediaPlayer SnakeSound2             = new();
 
         private readonly DoubleAnimation blendImage = new();
 
@@ -43,6 +42,11 @@ namespace SnakeGame
 
             Game_Timer.Tick         += GameRoutine;
 
+            SnakeSound1.Open(new Uri("sound_effects/snake_rattle1.mp3", UriKind.RelativeOrAbsolute));
+            SnakeSound2.Open(new Uri("sound_effects/snake_hiss.mp3", UriKind.RelativeOrAbsolute));
+            SnakeSound1.IsMuted = true;
+            SnakeSound2.IsMuted = true;
+
             HelloSnake();
             InitializeGame(7333);
         }
@@ -54,11 +58,19 @@ namespace SnakeGame
 
             await Task.Delay(1101);
 
+            SnakeSound1.IsMuted = false;
+            SnakeSound2.IsMuted = false;
+            SnakeSound1.Play();
+
             blendImage.AutoReverse = true;
             blendImage.Duration = TimeSpan.FromMilliseconds(3333);
             blendImage.From = 0;
             blendImage.To = 1;
             Start_Snake.BeginAnimation(OpacityProperty, blendImage);
+
+            await Task.Delay(2000);
+
+            SnakeSound2.Play();
         }
         private async void InitializeGame(int delay)
         {
