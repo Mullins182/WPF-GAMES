@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -23,6 +24,7 @@ namespace SnakeGame
 
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor  = Brushes.Red;
+        private readonly ImageBrush snakeHead       = new();
 
         private readonly List<Ellipse> snake        = [];
         private Point food;
@@ -46,6 +48,8 @@ namespace SnakeGame
 
             SnakeSound1.Open(new Uri("sound_effects/snake_rattle1.mp3", UriKind.RelativeOrAbsolute));
             SnakeSound2.Open(new Uri("sound_effects/snake_hiss.mp3", UriKind.RelativeOrAbsolute));
+
+            snakeHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/png/snake_head1.png"));
 
             SnakeSound1.IsMuted     = true;
             SnakeSound2.IsMuted     = true;
@@ -121,6 +125,8 @@ namespace SnakeGame
 
             play_area.Children.Add(piece);
             snake.Insert(0, piece);
+
+            DrawSnakeHead();
         }
 
         private void MoveSnake()
@@ -161,6 +167,25 @@ namespace SnakeGame
             Canvas.SetTop(newHead, newY);
             play_area.Children.Add(newHead);
             snake.Insert(0, newHead);
+
+            DrawSnakeHead();
+        }
+
+        private void DrawSnakeHead()
+        {
+            for (int i = 0; i < snake.Count; i++)
+            {
+                if (snake.First() == snake[i])
+                {
+                    snake[i].Fill = snakeHead;
+                    snakeHead.TileMode = TileMode.FlipX;
+                }
+                else
+                {
+                    snake[i].Fill = SnakeColor;
+                }
+            }
+
         }
 
         private void CheckCollision()
