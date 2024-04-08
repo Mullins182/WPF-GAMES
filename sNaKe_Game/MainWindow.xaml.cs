@@ -24,14 +24,17 @@ namespace SnakeGame
 
         private readonly SolidColorBrush SnakeColor = Brushes.Green;
         private readonly SolidColorBrush FoodColor  = Brushes.Red;
+        private readonly ImageBrush rattleSnake     = new();
         private readonly ImageBrush snakeHead       = new();
+        private readonly ImageBrush rattleSnakeSegm = new();
+        private readonly ImageBrush snakeFood       = new();
+        private readonly ImageBrush grass           = new();
 
-        private readonly List<Ellipse> snake        = [];
+        private readonly List<Rectangle> snake      = [];
         private Point food;
         private Direction direction                 = Direction.Left;
-        private readonly Ellipse foodPiece          = new()
+        private readonly Rectangle foodPiece        = new()
         {
-            Fill = Brushes.Red,
             Width = CellSize,
             Height = CellSize
         };
@@ -49,7 +52,19 @@ namespace SnakeGame
             SnakeSound1.Open(new Uri("sound_effects/snake_rattle1.mp3", UriKind.RelativeOrAbsolute));
             SnakeSound2.Open(new Uri("sound_effects/snake_hiss.mp3", UriKind.RelativeOrAbsolute));
 
-            snakeHead.ImageSource = new BitmapImage(new Uri("pack://application:,,,/png/snake_head1.png"));
+            rattleSnake.ImageSource = new BitmapImage(new Uri("pack://application:,,,/png/rattleSnake.png"));
+            snakeHead.ImageSource   = new BitmapImage(new Uri("pack://application:,,,/png/snake_head1.png"));
+            rattleSnakeSegm.ImageSource = new BitmapImage(new Uri("pack://application:,,,/png/rattleSnakeSegment.png"));
+            snakeFood.ImageSource   = new BitmapImage(new Uri("pack://application:,,,/png/mouse.png"));
+            grass.ImageSource       = new BitmapImage(new Uri("pack://application:,,,/png/grass_edit1.jpg"));
+
+            foodPiece.Fill          = snakeFood;
+            grass.Stretch           = Stretch.None;
+            grass.AlignmentX        = AlignmentX.Left;
+            grass.AlignmentY        = AlignmentY.Top;
+            grass.TileMode          = TileMode.Tile;
+            grass.Viewport          = new Rect(0, 0, 0.2, 0.2);
+            play_area.Background    = grass;
 
             SnakeSound1.IsMuted     = true;
             SnakeSound2.IsMuted     = true;
@@ -114,7 +129,7 @@ namespace SnakeGame
 
         private void DrawSnakePiece(int x, int y)
         {
-            var piece = new Ellipse
+            var piece = new Rectangle
             {
                 Fill = SnakeColor,
                 Width = CellSize,
@@ -124,7 +139,8 @@ namespace SnakeGame
             Canvas.SetTop(piece, y);
 
             play_area.Children.Add(piece);
-            snake.Insert(0, piece);
+            //snake.Insert(0, piece);
+            snake.Add(piece);
 
             DrawSnakeHead();
         }
@@ -157,7 +173,7 @@ namespace SnakeGame
             play_area.Children.Remove(tail);
 
             // Add new head
-            var newHead = new Ellipse
+            var newHead = new Rectangle
             {
                 Fill = SnakeColor,
                 Width = CellSize,
@@ -177,12 +193,12 @@ namespace SnakeGame
             {
                 if (snake.First() == snake[i])
                 {
+                    snakeHead.AlignmentX = 0;
                     snake[i].Fill = snakeHead;
-                    snakeHead.TileMode = TileMode.FlipX;
                 }
                 else
                 {
-                    snake[i].Fill = SnakeColor;
+                    snake[i].Fill = rattleSnakeSegm;
                 }
             }
 
@@ -285,7 +301,7 @@ namespace SnakeGame
 
         private void ReadyForPlay()
         {
-            play_area.Background    = new SolidColorBrush(Color.FromArgb(255,34,47,00));
+            play_area.Background    = grass;
             quit.IsEnabled          = true;
             reset.IsEnabled         = true;
             play.IsEnabled          = true;

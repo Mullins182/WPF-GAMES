@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <None Remove="png\Cute-green-snake-cartoon-on-transparent-background-PNG.png" />
+    <None Remove="png\grass_edit1.jpg" />
+    <None Remove="png\grass_edit2.jpg" />
+    <None Remove="png\grass_edit3.jpg" />
+    <None Remove="png\mouse.png" />
+    <None Remove="png\rattleSnake.png" />
+    <None Remove="png\rattleSnakeSegment.png" />
     <None Remove="png\snake_head1.png" />
     <None Remove="sound_effects\snake_hiss.mp3" />
     <None Remove="sound_effects\snake_rattle1.mp3" />
@@ -17,15 +23,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="png\Cute-green-snake-cartoon-on-transparent-background-PNG.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="png\Cute-green-snake-cartoon-on-transparent-background-PNG.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="png\grass_edit1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="png\grass_edit2.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="png\grass_edit3.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="png\mouse.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="png\rattleSnakeSegment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="png\snake_head1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="png\rattleSnake.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="sound_effects\snake_hiss.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

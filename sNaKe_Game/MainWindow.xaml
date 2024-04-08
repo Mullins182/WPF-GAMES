@@ -54,9 +54,9 @@
 
         </VirtualizingStackPanel>
 
-        <Image x:Name="Start_Snake" Source="/png/Cute-green-snake-cartoon-on-transparent-background-PNG.png" Grid.Row="0" Panel.ZIndex="3"
+        <Image x:Name="Start_Snake" Source="/png/rattleSnake.png" Grid.Row="0" Panel.ZIndex="3"
                Opacity="0"/>
-        <Canvas x:Name="play_area" Grid.Row="0" Background="#344700"/>
+        <Canvas x:Name="play_area" Grid.Row="0"/>
         <Label x:Name="infobox" Height="auto" Width="auto" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Bahnschrift" FontSize="35" FontWeight="Bold"
                Foreground="DarkGoldenrod"/>
