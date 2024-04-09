@@ -211,18 +211,11 @@ namespace SnakeGame
             var headY   = Canvas.GetTop(head);
 
             if (headX < 0 || headX >= play_area.ActualWidth - head.ActualWidth ||
-                headY < 0 || headY >= play_area.ActualHeight - 50)
+                headY < 0 || headY >= play_area.ActualHeight - 50 ||
+                snake.Any(part => part != head && Canvas.GetLeft(part) == headX && Canvas.GetTop(part) == headY))
             {
                 GameOver();
             }
-
-            //if (headX < 0 || headX >= play_area.ActualWidth ||
-            //    headY < 0 || headY >= play_area.ActualHeight ||
-            //    snake.Any(s => s != head && Canvas.GetLeft(s) == headX && Canvas.GetTop(s) == headY))
-            //{
-            //    GameOver();
-            //}
-
 
             // Check if food is eaten
             if (headX == food.X && headY == food.Y)
@@ -235,11 +228,6 @@ namespace SnakeGame
         {
             var random = new Random();
             int x, y;
-            //do
-            //{
-            //    x = random.Next(0, (int)play_area.ActualWidth);
-            //    y = random.Next(0, (int)play_area.ActualHeight);
-            //} while (snake.Any(piece => Canvas.GetLeft(piece) == x * CellSize && Canvas.GetTop(piece) == y * CellSize));
 
             do
             {
