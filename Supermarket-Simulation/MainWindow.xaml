@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Supermarket_Simulation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SUPERMARKET SIMULATION | V 0.0.1 | @Mullins182" Height="450" Width="800"
+        Background="Black">
     <Grid>
 
     </Grid>
