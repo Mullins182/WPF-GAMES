@@ -13,9 +13,6 @@ using System.Windows.Threading;
 
 namespace Supermarket_Simulation
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private readonly DoubleAnimation hide_menu      = new();
