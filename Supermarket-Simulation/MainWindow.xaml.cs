@@ -9,6 +9,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Supermarket_Simulation
 {
@@ -17,13 +18,15 @@ namespace Supermarket_Simulation
     /// </summary>
     public partial class MainWindow : Window
     {
-        DoubleAnimation hide_menu = new();
-        DoubleAnimation show_menu = new();
+        private readonly DoubleAnimation hide_menu      = new();
+        private readonly DoubleAnimation show_menu      = new();
 
-        public MainWindow()
+        private readonly DispatcherTimer gameroutine    = new();
+
+        private int loopCounter = 0;
+
+        private void Set_MenuAnimationProperties()
         {
-            InitializeComponent();
-
             hide_menu.Duration  = TimeSpan.FromSeconds(0.5);
             hide_menu.From      = 1.0;
             hide_menu.To        = 0.0;
@@ -32,7 +35,31 @@ namespace Supermarket_Simulation
             show_menu.To        = 1.0;
         }
 
-        private void quit_Click(object sender, RoutedEventArgs e)
+        private void Set_DispatcherTimerProperties()
+        {
+            gameroutine.Interval    = TimeSpan.FromMilliseconds(50);
+            gameroutine.Tick        += Gameroutine;
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            Set_MenuAnimationProperties();
+            Set_DispatcherTimerProperties();
+        }
+
+        // GAMEROUTINE SECTION
+        private void Gameroutine(object? sender, EventArgs e)
+        {
+            loopCounter += 1;
+            GameTime.Content = loopCounter;
+        }
+
+            // GAMEROUTINE SECTION END
+
+        // UI-Controls-Events
+        private void Quit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -46,5 +73,21 @@ namespace Supermarket_Simulation
         {
             menu_grid.BeginAnimation(OpacityProperty, hide_menu);
         }
+
+        private void StartStop_Click(object sender, RoutedEventArgs e)
+        {
+            if (gameroutine.IsEnabled)
+            {
+                gameroutine.Stop();
+            }
+            else
+            {
+                GameTime.Visibility = Visibility.Visible;
+                GameTime.Content = "";
+                gameroutine.Start();
+            }
+        }
+
+        // UI-Controls-Events END
     }
 }
