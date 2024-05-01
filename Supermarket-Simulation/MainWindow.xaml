@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Supermarket_Simulation"
         mc:Ignorable="d"
-        Title="SUPERMARKET SIMULATION | V 0.0.1 | @Mullins182" Height="450" Width="800"
-        Background="Black">
+        Title="SUPERMARKET SIMULATION | V 0.1.0 | @Mullins182" Height="768" Width="1024"
+        Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized">
     <Grid>
-
+        <Canvas x:Name="playground" Width="auto" Height="auto" Background="Green">
+            <StackPanel x:Name="menu_grid" Width="1024" Height="60" Background="Black" Orientation="Horizontal" Opacity="0.0" 
+                        MouseEnter="menu_grid_MouseEnter" MouseLeave="menu_grid_MouseLeave">
+                <Button x:Name="Start" Width="auto" Height="auto" Background="Red" Content="Start" FontSize="30"
+                            />
+                <Button x:Name="quit" Width="auto" Height="auto" Background="Red" Content="Quit" FontSize="30" ClickMode="Release"
+                            Click="quit_Click"/>
+            </StackPanel>
+        </Canvas>
     </Grid>
 </Window>
