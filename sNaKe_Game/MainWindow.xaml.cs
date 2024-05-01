@@ -12,6 +12,7 @@ namespace SnakeGame
     public partial class MainWindow : Window
     {
         private const int CellSize                  = 50;
+        private static int MiceEaten                = 0;
 
         private bool iniFin                         = true;
 
@@ -19,6 +20,7 @@ namespace SnakeGame
 
         private readonly MediaPlayer SnakeSound1    = new();
         private readonly MediaPlayer SnakeSound2    = new();
+        private readonly MediaPlayer Mouse_Squeak   = new();
 
         private readonly DoubleAnimation FadeInOut  = new();
 
@@ -51,6 +53,7 @@ namespace SnakeGame
 
             SnakeSound1.Open(new Uri("sound_effects/snake_rattle1.mp3", UriKind.RelativeOrAbsolute));
             SnakeSound2.Open(new Uri("sound_effects/snake_hiss.mp3", UriKind.RelativeOrAbsolute));
+            Mouse_Squeak.Open(new Uri("sound_effects/squeak.mp3", UriKind.RelativeOrAbsolute));
 
             rattleSnake.ImageSource = new BitmapImage(new Uri("pack://application:,,,/png/rattleSnake.png"));
             snakeHead.ImageSource   = new BitmapImage(new Uri("pack://application:,,,/png/snake_head1.png"));
@@ -68,6 +71,7 @@ namespace SnakeGame
 
             SnakeSound1.IsMuted     = true;
             SnakeSound2.IsMuted     = true;
+            Mouse_Squeak.IsMuted    = true;
             infobox.Visibility      = Visibility.Collapsed;
             infobox.Content         = "PRESS\n[SPACE] => Start Game\n[R]          => Reset Game\n[Q]          => Quit Game";
 
@@ -106,7 +110,14 @@ namespace SnakeGame
             play.IsEnabled  = true;
             reset.IsEnabled = true;
 
+            Mouse_Squeak.IsMuted = false;
+
+            GameOverLabel.Visibility = Visibility.Hidden;
+
             snake.Clear();
+
+            MiceEaten = 0;
+
             direction = Direction.Left;
             play_area.Children.Clear();
 
@@ -194,11 +205,13 @@ namespace SnakeGame
                 if (snake.First() == snake[i])
                 {
                     snakeHead.AlignmentX = 0;
-                    snake[i].Fill = snakeHead;
+                    //snake[i].Fill = snakeHead;
+                    snake[i].Fill = Brushes.SandyBrown;
                 }
                 else
                 {
-                    snake[i].Fill = rattleSnakeSegm;
+                    //snake[i].Fill = rattleSnakeSegm;
+                    snake[i].Fill = Brushes.Brown;
                 }
             }
         }
@@ -244,14 +257,26 @@ namespace SnakeGame
 
         private void EatFood()
         {
+            Mouse_Squeak.Play();
+            Mouse_Squeak.Position = TimeSpan.Zero;
             play_area.Children.Remove(foodPiece);
+
             DrawSnakePiece((int)food.X, (int)food.Y);
             PlaceFood();
+
+            MiceEaten++;
+
+            Points.Content      = MiceEaten.ToString();
+            FadeInOut.Duration  = TimeSpan.FromMilliseconds(1200);
+
+            Points.BeginAnimation(OpacityProperty, FadeInOut);
         }
 
         private void GameOver()
         {
             Game_Timer.Stop();
+            GameOverLabel.Content = $"Congrats !\n\nYou've catched {MiceEaten} mice !";
+            GameOverLabel.Visibility = Visibility.Visible;
             play_area.Background = Brushes.DarkRed;
             quit.IsEnabled      = true;
             reset.IsEnabled     = true;
