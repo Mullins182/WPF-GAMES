@@ -5,19 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Supermarket_Simulation"
         mc:Ignorable="d"
-        Title="SUPERMARKET SIMULATION | V 0.2.0 | @Mullins182" Height="768" Width="1024"
+        Title="SUPERMARKET SIMULATION | V 0.2.0 | @Mullins182" Height="1080" Width="1920"
         Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized">
     <Grid>
-        <Canvas x:Name="playground" Width="auto" Height="auto" Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="GridX"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="GridY"/>
+        </Grid.RowDefinitions>
+        <Canvas x:Name="playground" Width="auto" Height="auto" Background="Black" Visibility="Visible">
+            <Ellipse x:Name="GameStatus" Width="20" Height="20" Fill="LawnGreen" Canvas.Left="0" Canvas.Top="0" Opacity="0.0"/>
             <StackPanel x:Name="menu_grid" Width="1024" Height="60" Background="Transparent" Orientation="Horizontal" Opacity="0.0" 
-                        MouseEnter="menu_grid_MouseEnter" MouseLeave="menu_grid_MouseLeave">
+                        MouseEnter="menu_grid_MouseEnter" MouseLeave="menu_grid_MouseLeave" HorizontalAlignment="Left">
                 <Button x:Name="StartStop" Width="auto" Height="auto" Background="Red" Content="Start/Pause" FontSize="30" ClickMode="Release"
                             Click="StartStop_Click"/>
                 <Button x:Name="Quit" Width="auto" Height="auto" Background="Red" Content="Quit" FontSize="30" ClickMode="Release"
                             Click="Quit_Click"/>
             </StackPanel>
-            <Label x:Name="GameTime" Width="150" Height="auto" FontSize="15" Foreground="LawnGreen" Content="XXX" Visibility="Hidden"
-                   Margin="800,0,0,0"/>
         </Canvas>
     </Grid>
 </Window>
