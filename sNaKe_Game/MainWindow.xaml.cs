@@ -201,7 +201,6 @@ namespace SnakeGame
                     snake[i].Fill = rattleSnakeSegm;
                 }
             }
-
         }
 
         private void CheckCollision()
