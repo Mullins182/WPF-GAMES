@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnakeGame"
         mc:Ignorable="d"
-        Title="s N a K e | Version Beta 0.8 | by Mullins182" Height="1030" Width="1515" SizeToContent="Manual"
+        Title="s N a K e | Version 1.0 | by Mullins182" Height="1030" Width="1515" SizeToContent="Manual"
         WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize"
         Foreground="White" Background="Black">
     <!--Control Template Override für Buttons um Highlighting bei Mouseover zu verhindern !-->
@@ -40,9 +40,15 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
+        <Label x:Name="GameOverLabel" Width="auto" Height="auto" FontFamily="Arial Black" FontWeight="Bold" FontSize="65" Foreground="Gold"
+                   Background="Transparent" Grid.Row="0" HorizontalAlignment="Center" Panel.ZIndex="10" Visibility="Hidden"
+               VerticalAlignment="Center"/>
+        <Label x:Name="Points" Width="auto" Height="auto" FontFamily="Arial Black" FontWeight="Bold" FontSize="200" Foreground="Gold"
+                   Background="Transparent" Grid.Row="0" Opacity="0.0" HorizontalAlignment="Center" Panel.ZIndex="10"
+               VerticalAlignment="Center"/>
+
         <VirtualizingStackPanel x:Name="menu" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Background="#330000" Height="50" Width="auto" KeyDown="menu_KeyDown">
-
             <Button x:Name="play" Content="Start/Pause Game" Height="40" Width="210" Background="Black" Click="play_Click" ClickMode="Release"
                     Foreground="DarkOrange" FontFamily="Arial Black" FontSize="20" Template="{StaticResource NoMouseOverButtonTemplate}"/>
 
@@ -54,7 +60,12 @@
 
         </VirtualizingStackPanel>
 
-        <Canvas x:Name="play_area" Grid.Row="0" Background="#344700"/>
+        <Image x:Name="Start_Snake" Source="/png/rattleSnake.png" Grid.Row="0" Panel.ZIndex="3"
+               Opacity="0"/>
+        <Canvas x:Name="play_area" Grid.Row="0"/>
+        <Label x:Name="infobox" Height="auto" Width="auto" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Bahnschrift" FontSize="45" FontWeight="Bold"
+               Foreground="Black"/>
 
     </Grid>
 </Window>
