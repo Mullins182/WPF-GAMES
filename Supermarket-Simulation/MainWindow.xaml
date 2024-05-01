@@ -1,0 +1,30 @@
+﻿<Window x:Class="Supermarket_Simulation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Supermarket_Simulation"
+        mc:Ignorable="d"
+        Title="SUPERMARKET SIMULATION | V 0.2.0 | @Mullins182" Height="1080" Width="1920"
+        Background="Black" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="GridX"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="GridY"/>
+        </Grid.RowDefinitions>
+        <Canvas x:Name="playground" Width="auto" Height="auto" Background="Black" Visibility="Visible">
+            <Ellipse x:Name="GameStatus" Width="20" Height="20" Fill="LawnGreen" Canvas.Left="0" Canvas.Top="0" Opacity="0.0"/>
+            <Rectangle x:Name="CheckOut" Width="400" Height="70" Fill="DarkRed" Canvas.Left="750" Canvas.Top="200"/>
+            <Rectangle x:Name="Shelf1" Width="80" Height="500" Fill="RosyBrown" Canvas.Left="0" Canvas.Top="500"/>
+            <StackPanel x:Name="menu_grid" Width="auto" Height="auto" Background="Transparent" Orientation="Horizontal" Opacity="0.0" 
+                        MouseEnter="menu_grid_MouseEnter" MouseLeave="menu_grid_MouseLeave" HorizontalAlignment="Left">
+                <Button x:Name="StartStop" Width="auto" Height="auto" Background="Red" Content="Start/Pause" FontSize="30" ClickMode="Release"
+                            Click="StartStop_Click"/>
+                <Button x:Name="Quit" Width="auto" Height="auto" Background="Red" Content="Quit" FontSize="30" ClickMode="Release"
+                            Click="Quit_Click"/>
+            </StackPanel>
+        </Canvas>
+    </Grid>
+</Window>
