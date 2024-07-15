@@ -31,7 +31,11 @@ namespace JetPack_2
 
         private void GenerateLevel1()
         {
-
+            Platforms Ground = new(0, 940, Brushes.Green, 20, 1500);
+            Rectangle ground = Ground.GeneratePlatform();
+            GameCanvas.Children.Add(ground);
+            Canvas.SetTop(ground, Ground.PosY);
+            Canvas.SetLeft(ground, Ground.PosX);
         }
 
         private void SetPlayerPos()

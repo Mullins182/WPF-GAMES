@@ -11,7 +11,7 @@ namespace JetPack_2.Models
     public class Player
     {
 
-        public Player() {}
+        public Player() { }
 
         public Rectangle PlayerModel = new();
 
@@ -25,11 +25,10 @@ namespace JetPack_2.Models
 
         public void SetPlayerProps()
         {
-
-            PlayerModel.Name      = "Jack";
-            PlayerModel.Width     = this.Width;
-            PlayerModel.Height    = this.Height;
-            PlayerModel.Fill      = this.PlayerColor;
+            PlayerModel.Name        = this.Name;
+            PlayerModel.Width       = this.Width;
+            PlayerModel.Height      = this.Height;
+            PlayerModel.Fill        = this.PlayerColor;
         }
     }
 }
