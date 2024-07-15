@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JetPack_2"
         mc:Ignorable="d"
-        Title="JETPACK 2 | Version ALPHA 0.3 | By Mullins182" Height="1000" Width="1500" WindowStartupLocation="CenterScreen" Background="Transparent"
+        Title="JETPACK 2 | Version ALPHA 0.4 | By Mullins182" Height="1000" Width="1500" WindowStartupLocation="CenterScreen" Background="Transparent"
         WindowState="Normal" WindowStyle="ThreeDBorderWindow" BorderBrush="Transparent" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
     <Grid>
-        <Canvas x:Name="GameCanvas" Background="Black"/>
+        <Canvas x:Name="GameCanvas" Background="Black" Width="auto" Height="auto"/>
     </Grid>
 </Window>

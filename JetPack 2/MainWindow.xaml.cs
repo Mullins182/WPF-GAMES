@@ -43,8 +43,16 @@ namespace JetPack_2
 
         private void GameRoutine_Tick(object? sender, EventArgs e)
         {
-            player.PosY = jump ? player.PosY -= 5 : player.PosY >= 880 ? player.PosY += 0 : player.PosY += 5;
+            jump = player.PosY <= 0 ? false : jump;
+            player.PosY = jump ? player.PosY -= 5 : player.PosY >= 880 ? player.PosY : player.PosY += 5;
             Canvas.SetTop(player.PlayerModel, player.PosY);
+
+            moveLeft = player.PosX <= 0 ? false : moveLeft;
+            moveRight = player.PosX + player.PlayerModel.Width >= GameCanvas.ActualWidth ? false : moveRight;
+
+            player.PosX = moveLeft ? player.PosX -= 5 : moveRight ? player.PosX += 5 
+                : player.PosX;
+            Canvas.SetLeft(player.PlayerModel, player.PosX);
         }
 
         private void GenerateLevel1()
@@ -68,12 +76,16 @@ namespace JetPack_2
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            jump = e.Key == Key.Space ? true : false;
+            moveLeft    = e.Key == Key.Left ? true : moveLeft;
+            moveRight   = e.Key == Key.Right ? true : moveRight;
+            jump        = e.Key == Key.Space ? true : jump;
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            jump = e.Key == Key.Space ? false : jump;
+            moveLeft    = e.Key == Key.Left ? false : moveLeft;
+            moveRight   = e.Key == Key.Right ? false : moveRight;
+            jump        = e.Key == Key.Space ? false : jump;
         }
     }
 }
