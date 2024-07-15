@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sNaKe_Game", "sNaKe_Game\sN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket-Simulation", "Supermarket-Simulation\Supermarket-Simulation.csproj", "{4307A54D-10B6-49CA-80FD-9078C2A23577}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetPack 2", "JetPack 2\JetPack 2.csproj", "{D5C1142B-1331-4174-9D67-7D841D7064EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4307A54D-10B6-49CA-80FD-9078C2A23577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4307A54D-10B6-49CA-80FD-9078C2A23577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4307A54D-10B6-49CA-80FD-9078C2A23577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5C1142B-1331-4174-9D67-7D841D7064EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C1142B-1331-4174-9D67-7D841D7064EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C1142B-1331-4174-9D67-7D841D7064EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C1142B-1331-4174-9D67-7D841D7064EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
