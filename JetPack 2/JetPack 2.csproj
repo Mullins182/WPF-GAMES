@@ -9,4 +9,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="PNG\Jetpack2Label.png" />
+    <None Remove="PNG\Jetpack3Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="PNG\Jetpack2Label.png" />
+    <Resource Include="PNG\Jetpack3Logo.png" />
+  </ItemGroup>
+
 </Project>
